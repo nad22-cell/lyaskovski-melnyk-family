@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запрошення на родинний обід | Лясковські-Мельник-Цура-Беновські</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        terracotta: '#A64B2A',
+                        'terracotta-dark': '#8B3A1D',
+                        gold: '#D4AF37',
+                        emerald: '#2D5A27',
+                        charcoal: '#2C2C2C',
+                        sand: '#F4EFEA',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Traditional Ukrainian Subtle Pattern background */
+        .vyshyvanka-border {
+            background-image: repeating-linear-gradient(45deg, #A64B2A 0, #A64B2A 10px, transparent 0, transparent 20px);
+        }
+        
+        .ornament-bg {
+            background-color: #FDFBF7;
+            background-image: radial-gradient(#A64B2A 0.5px, transparent 0.5px), radial-gradient(#A64B2A 0.5px, #FDFBF7 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0,10px 10px;
+            background-opacity: 0.05;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased selection:bg-terracotta selection:text-white">
+
+    <!-- Header / Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center text-center p-6 overflow-hidden">
+        <!-- Subtle Pattern Overlay -->
+        <div class="absolute inset-0 opacity-5 ornament-bg pointer-events-none"></div>
+
+        <!-- Decorative Floral/Ornament Frame Top -->
+        <div class="absolute top-0 inset-x-0 h-4 bg-terracotta flex justify-center items-center overflow-hidden">
+            <div class="text-white text-xs tracking-widest uppercase flex space-x-4">
+                <span>✦ ЛЯСКОВСЬКІ ✦ МЕЛЬНИК ✦ ЦУРА ✦ БЕНОВСЬКІ ✦</span>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto z-10 space-y-6 pt-8">
+            <!-- Embroidery Icon Accent -->
+            <div class="inline-block p-3 rounded-full bg-sand text-terracotta mb-2 shadow-sm">
+                <svg class="w-10 h-10 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2L15 8L21 9L16.5 13.5L18 19.5L12 16.5L6 19.5L7.5 13.5L3 9L9 8L12 2Z" stroke="#A64B2A" stroke-width="1.5" fill="none"/>
+                </svg>
+            </div>
+
+            <p class="text-terracotta uppercase tracking-[0.25em] text-sm font-semibold">Затишна родинна зустріч</p>
+            
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-charcoal leading-tight">
+                Святковий родинний обід
+            </h1>
+
+            <p class="font-serif italic text-2xl sm:text-3xl text-terracotta">
+                родини Лясковських-Мельник-Цура-Беновських
+            </p>
+
+            <div class="w-24 h-0.5 bg-gold mx-auto my-4"></div>
+
+            <p class="text-gray-600 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+                Запрошуємо вас розділити радість спільного дня, поспілкуватися, згадати найтепліші миті та створити нові родинні спогади!
+            </p>
+
+            <!-- Quick Date & Venue Badge -->
+            <div class="flex flex-wrap justify-center gap-4 text-sm font-medium pt-4">
+                <div class="glass-card px-5 py-3 rounded-2xl flex items-center gap-2 shadow-sm">
+                    <i class="fa-regular fa-calendar-check text-terracotta text-lg"></i>
+                    <span>22 листопада 2026</span>
+                </div>
+                <div class="glass-card px-5 py-3 rounded-2xl flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-location-dot text-emerald text-lg"></i>
+                    <span>ресторан «Акварель», Жовква</span>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="pt-6">
+                <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 font-semibold">До нашої зустрічі залишилося:</p>
+                <div id="countdown" class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+                    <div class="glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="days" class="block font-serif text-2xl sm:text-4xl font-bold text-terracotta">00</span>
+                        <span class="text-[10px] sm:text-xs text-gray-500 uppercase">Днів</span>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="hours" class="block font-serif text-2xl sm:text-4xl font-bold text-terracotta">00</span>
+                        <span class="text-[10px] sm:text-xs text-gray-500 uppercase">Годин</span>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="minutes" class="block font-serif text-2xl sm:text-4xl font-bold text-terracotta">00</span>
+                        <span class="text-[10px] sm:text-xs text-gray-500 uppercase">Хвилин</span>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="seconds" class="block font-serif text-2xl sm:text-4xl font-bold text-terracotta">00</span>
+                        <span class="text-[10px] sm:text-xs text-gray-500 uppercase">Секунд</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="pt-6 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#rsvp" class="bg-terracotta hover:bg-terracotta-dark text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+                    Підтвердити присутність
+                </a>
+                <button onclick="addToCalendar()" class="bg-white hover:bg-sand text-charcoal border border-gray-300 font-semibold px-6 py-3.5 rounded-full shadow-sm transition flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-calendar-plus text-terracotta"></i>
+                    Додати в календар
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Details Grid Section -->
+    <section class="py-16 px-4 bg-sand/40">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+            
+            <!-- Dress Code Card -->
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-terracotta/10 text-terracotta flex items-center justify-center mb-6 text-xl">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal mb-3">Дрес-код</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Одягайте свої найулюбленіші <strong class="text-terracotta font-medium">вишиванки</strong>! Давайте створимо яскраве, вишукане та справді рідне українське свято.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200/60 flex items-center text-sm text-gray-500 italic">
+                    <i class="fa-solid fa-heart text-terracotta mr-2"></i> Традиція, що об'єднує покоління
+                </div>
+            </div>
+
+            <!-- ZSU Donation Card -->
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald/10 text-emerald flex items-center justify-center mb-6 text-xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal mb-3">Головний подарунок</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Найкращий подарунок для нас — це ваша присутність та посмішки. А замість квітів чи подарунків пропонуємо зробити донат на підтримку ЗСУ, завдяки яким ми можемо зібратися разом.
+                    </p>
+                </div>
+                <div>
+                    <button onclick="showDonationModal()" class="w-full bg-emerald hover:bg-emerald/90 text-white font-medium py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        Підтримати ЗСУ (Реквізити / Банка)
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Timeline Program Section -->
+    <section class="py-20 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-terracotta font-semibold text-sm uppercase tracking-widest">Програма дня</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal mt-2">Таймінг нашого свята</h2>
+            <p class="text-gray-500 mt-2">22 листопада 2026 року</p>
+            <div class="w-16 h-0.5 bg-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="relative border-l-2 border-terracotta/30 ml-4 sm:ml-32 space-y-8">
+            
+            <!-- Event 1 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-terracotta border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-terracotta mb-1 sm:mb-0 sm:text-right w-28">
+                    12:00 – 13:00
+                </div>
+                <div class="glass-card p-5 rounded-2xl transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-church text-terracotta text-base"></i>
+                        Служба в монастирі
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Спільна молитва та подяка за нашу родину й захисників України.</p>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-gray-500 mb-1 sm:mb-0 sm:text-right w-28">
+                    13:00 – 13:30
+                </div>
+                <div class="glass-card p-5 rounded-2xl transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-car text-gold text-base"></i>
+                        Дорога до ресторану
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Переїзд гостей до ресторану «Акварель» (вул. Вокзальна, 14а).</p>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-terracotta border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-terracotta mb-1 sm:mb-0 sm:text-right w-28">
+                    13:30 – 14:00
+                </div>
+                <div class="glass-card p-5 rounded-2xl transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-wine-glass text-terracotta text-base"></i>
+                        Welcome-зона
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Зустріч гостей, ігристе вино, аперитив та вишукані закуски.</p>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-emerald border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-emerald mb-1 sm:mb-0 sm:text-right w-28">
+                    14:00 – 15:30
+                </div>
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-utensils text-emerald text-base"></i>
+                        Святковий обід
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Урочистий початок застілля, теплі тости, спогади та затишні розмови.</p>
+                </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-gray-500 mb-1 sm:mb-0 sm:text-right w-28">
+                    15:30 – 16:30
+                </div>
+                <div class="glass-card p-5 rounded-2xl transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-music text-gold text-base"></i>
+                        Музична пауза
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Танці та відпочинок під сети нашого DJ.</p>
+                </div>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-terracotta border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-terracotta mb-1 sm:mb-0 sm:text-right w-28">
+                    16:30 – 17:30
+                </div>
+                <div class="glass-card p-5 rounded-2xl transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-drumstick-bite text-terracotta text-base"></i>
+                        Основна страва
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Подача головного гарячого частування від шеф-кухаря.</p>
+                </div>
+            </div>
+
+            <!-- Event 7 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-gray-500 mb-1 sm:mb-0 sm:text-right w-28">
+                    17:30 – 18:30
+                </div>
+                <div class="glass-card p-5 rounded-2xl transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-gold text-base"></i>
+                        Музично-танцювальний сет
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Активація на танцполі, родинні конкурси та розваги.</p>
+                </div>
+            </div>
+
+            <!-- Event 8 -->
+            <div class="relative pl-8 sm:pl-10 group">
+                <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-terracotta border-4 border-cream"></div>
+                <div class="sm:absolute sm:-left-36 sm:top-1 text-sm font-semibold text-terracotta mb-1 sm:mb-0 sm:text-right w-28">
+                    18:30 – 19:30
+                </div>
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-terracotta transition hover:shadow-md">
+                    <h3 class="font-serif text-xl font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-cake-candles text-terracotta text-base"></i>
+                        Святковий торт & Солодкий фінал
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">Урочисте розрізання торта, запашна кава/чай, фінальні танці з DJ.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Location & Map Section -->
+    <section class="py-16 px-4 bg-sand/30 border-y border-gold/20">
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+            <span class="text-terracotta font-semibold text-sm uppercase tracking-widest">Локація</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Ресторан «Акварель»</h2>
+            <p class="text-gray-600 flex items-center justify-center gap-2 text-lg">
+                <i class="fa-solid fa-map-pin text-terracotta"></i>
+                м. Жовква, вул. Вокзальна, 14а
+            </p>
+
+            <div class="pt-2 flex flex-wrap justify-center gap-4">
+                <a href="https://maps.google.com/?q=Ресторан+Акварель+Жовква+вул+Вокзальна+14а" target="_blank" class="bg-white hover:bg-gray-50 text-charcoal border border-gray-300 font-semibold px-6 py-3 rounded-xl shadow-sm transition flex items-center gap-2">
+                    <i class="fa-brands fa-google text-red-500"></i> Відкрити в Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="py-20 px-4 max-w-2xl mx-auto">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl shadow-lg border border-gold/40 relative">
+            
+            <div class="text-center mb-8">
+                <span class="text-terracotta font-semibold text-sm uppercase tracking-widest">Будемо раді бачити вас</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal my-2">Підтвердження присутності</h2>
+                <p class="text-gray-600 text-sm">Будь ласка, дайте відповідь до <strong class="text-terracotta">15 жовтня 2026 року</strong>, щоб ми могли все чудово організувати.</p>
+            </div>
+
+            <form id="rsvpForm" onsubmit="handleRSVP(event)" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Ваше ім'я та прізвище *</label>
+                    <input type="text" required placeholder="напр., Сім'я Мельників" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-terracotta focus:border-transparent outline-none transition bg-white/80">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Чи зможете ви прийти? *</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="border border-gray-300 rounded-xl p-4 flex items-center gap-3 cursor-pointer hover:bg-cream transition bg-white">
+                            <input type="radio" name="attendance" value="yes" checked class="accent-terracotta w-4 h-4">
+                            <span class="font-medium text-gray-800">Так, з радістю! 🎉</span>
+                        </label>
+                        <label class="border border-gray-300 rounded-xl p-4 flex items-center gap-3 cursor-pointer hover:bg-cream transition bg-white">
+                            <input type="radio" name="attendance" value="no" class="accent-terracotta w-4 h-4">
+                            <span class="font-medium text-gray-800">На жаль, ні 😔</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Кількість осіб</label>
+                    <select class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-terracotta focus:border-transparent outline-none transition bg-white/80">
+                        <option value="1">1 особа</option>
+                        <option value="2" selected>2 особи</option>
+                        <option value="3">3 особи</option>
+                        <option value="4+">4 і більше осіб</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Побажання / Харчові вподобання</label>
+                    <textarea rows="3" placeholder="Особливості харчування, дитячий стілець або інші коментарі..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-terracotta focus:border-transparent outline-none transition bg-white/80"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-terracotta hover:bg-terracotta-dark text-white font-bold py-4 rounded-xl shadow-md hover:shadow-lg transition">
+                    Надіслати відповідь
+                </button>
+            </form>
+
+            <!-- Success Confirmation State (Hidden by default) -->
+            <div id="rsvpSuccess" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 bg-emerald/10 text-emerald rounded-full flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3 class="font-serif text-3xl font-bold text-charcoal">Дякуємо за вашу відповідь!</h3>
+                <p class="text-gray-600 max-w-md mx-auto">
+                    Ми зберегли вашу інформацію. Чекаємо нетерпляче на зустріч з вами 22 листопада! ❤️
+                </p>
+                <button onclick="resetRSVP()" class="text-xs text-gray-400 underline hover:text-gray-600">Надіслати ще одну відповідь</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-sm text-gray-500 border-t border-gray-200">
+        <p>З любов'ю, родина Лясковських, Мельників, Цур та Беновських ❤️</p>
+        <p class="text-xs text-gray-400 mt-1">2026 р. • Жовква</p>
+    </footer>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-white max-w-md w-full p-6 sm:p-8 rounded-3xl shadow-2xl relative">
+            <button onclick="closeDonationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center space-y-4">
+                <div class="w-12 h-12 bg-emerald/10 text-emerald rounded-full flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-heart-circle-check"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-charcoal">Донат для ЗСУ</h3>
+                <p class="text-sm text-gray-600">
+                    Наш найкращий подарунок — підтримка тих, завдяки кому ми маємо можливість обійняти один одного!
+                </p>
+
+                <!-- Mock QR Code Placeholder -->
+                <div class="p-4 bg-gray-50 rounded-2xl border border-dashed border-gray-300 my-4">
+                    <img src="https://placehold.co/200x200/2D5A27/ffffff?text=Банка+ЗСУ+QR" alt="QR Code" class="w-40 h-40 mx-auto rounded-lg shadow-sm">
+                    <p class="text-xs text-gray-500 mt-2">Скануйте QR-код застосунком банку</p>
+                </div>
+
+                <div class="space-y-2 text-left bg-sand/50 p-3 rounded-xl text-xs font-mono">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-500">Банка:</span>
+                        <span class="font-bold text-gray-800">Mono / Приват</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-500">Номер картки:</span>
+                        <span class="font-bold text-gray-800">4441 •••• •••• 1234</span>
+                    </div>
+                </div>
+
+                <button onclick="copyCardNumber()" class="w-full bg-emerald text-white py-2.5 rounded-xl font-medium text-sm hover:bg-emerald/90 transition flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-copy"></i> Скопіювати номер карти
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Countdown Timer Logic
+        const eventDate = new Date('November 22, 2026 12:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // RSVP Form Handling
+        function handleRSVP(e) {
+            e.preventDefault();
+            
+            // Trigger Confetti Celebration
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            document.getElementById('rsvpForm').classList.add('hidden');
+            document.getElementById('rsvpSuccess').classList.remove('hidden');
+        }
+
+        function resetRSVP() {
+            document.getElementById('rsvpForm').reset();
+            document.getElementById('rsvpForm').classList.remove('hidden');
+            document.getElementById('rsvpSuccess').classList.add('hidden');
+        }
+
+        // Add to Calendar Feature
+        function addToCalendar() {
+            const title = encodeURIComponent("Святковий родинний обід (Лясковські-Мельник-Цура-Беновські)");
+            const details = encodeURIComponent("Затишна родинна зустріч у вишиванках. Донат на ЗСУ замість подарунків.");
+            const location = encodeURIComponent("Ресторан Акварель, вул. Вокзальна, 14а, Жовква");
+            const startDate = "20261122T100000Z";
+            const endDate = "20261122T173000Z";
+
+            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
+            window.open(googleCalendarUrl, '_blank');
+        }
+
+        // Donation Modal Controls
+        function showDonationModal() {
+            document.getElementById('donationModal').classList.remove('hidden');
+        }
+
+        function closeDonationModal() {
+            document.getElementById('donationModal').classList.add('hidden');
+        }
+
+        function copyCardNumber() {
+            const tempInput = document.createElement('input');
+            tempInput.value = '4441000000001234';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            alert('Номер картки скопійовано!');
+        }
+    </script>
+</body>
+</html>
