@@ -52,27 +52,64 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        /* Стилі для фонового слайд-шоу */
+        .hero-slideshow {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(253, 251, 247, 0.84);
+            z-index: 1;
         }
     </style>
 </head>
 <body class="bg-cream text-charcoal font-sans antialiased selection:bg-terracotta selection:text-white">
 
-    <!-- Header / Hero Section -->
+    <!-- Header / Hero Section з фоновим слайд-шоу -->
     <header class="relative min-h-screen flex items-center justify-center text-center p-6 overflow-hidden">
+        
+        <!-- Фонове слайд-шоу (працює, якщо завантажити photo1.jpg, photo2.jpg, photo3.jpg) -->
+        <div class="hero-slideshow">
+            <div class="hero-slide active" style="background-image: url('photo1.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('photo2.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('photo3.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
         <!-- Subtle Pattern Overlay -->
-        <div class="absolute inset-0 opacity-5 ornament-bg pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-5 ornament-bg pointer-events-none z-10"></div>
 
         <!-- Decorative Floral/Ornament Frame Top -->
-        <div class="absolute top-0 inset-x-0 h-4 bg-terracotta flex justify-center items-center overflow-hidden">
+        <div class="absolute top-0 inset-x-0 h-4 bg-terracotta flex justify-center items-center overflow-hidden z-20">
             <div class="text-white text-xs tracking-widest uppercase flex space-x-4">
                 <span>✦ ЛЯСКОВСЬКІ ✦ МЕЛЬНИК ✦ ЦУРА ✦ БЕНОВСЬКІ ✦</span>
             </div>
         </div>
 
-        <div class="max-w-3xl mx-auto z-10 space-y-6 pt-8">
+        <div class="max-w-3xl mx-auto z-20 space-y-6 pt-8 relative">
            <!-- Photo Accent -->
             <div class="mb-4 flex justify-center">
                 <img src="20261101_063607811_iOS.jpeg" alt="Родинне фото" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-full shadow-md border-4 border-gold">
@@ -131,9 +168,9 @@
 
             <!-- Action Buttons -->
             <div class="pt-6 flex flex-col sm:flex-row justify-center gap-4">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwKR80MRIqo0ax18PALF1t1pP9rWi20ECrHPDNdNCANpm3XQ/viewform?usp=header" target="_blank" class="bg-terracotta hover:bg-terracotta-dark text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
-        Підтвердити присутність
-    </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwKR80MRIqo0ax18PALF1t1pP9rWi20ECrHPDNdNCANpm3XQ/viewform?usp=header" target="_blank" class="bg-terracotta hover:bg-terracotta-dark text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+                    Підтвердити присутність
+                </a>
                 <button onclick="addToCalendar()" class="bg-white hover:bg-sand text-charcoal border border-gray-300 font-semibold px-6 py-3.5 rounded-full shadow-sm transition flex items-center justify-center gap-2">
                     <i class="fa-regular fa-calendar-plus text-terracotta"></i>
                     Додати в календар
@@ -175,9 +212,9 @@
                 </div>
                 <div>
                     <a href="https://savelife.in.ua/donate/#donate-army-card-once" target="_blank" class="w-full bg-emerald hover:bg-emerald/90 text-white font-medium py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow">
-    <i class="fa-solid fa-hand-holding-dollar"></i>
-    Підтримати ЗСУ (Перейти на Банку)
-</a>
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        Підтримати ЗСУ (Перейти на Банку)
+                    </a>
                 </div>
             </div>
 
@@ -336,7 +373,7 @@
         </div>
     </section>
 
-  <!-- Google Form RSVP Section -->
+    <!-- Google Form RSVP Section -->
     <section id="rsvp" class="py-20 px-4 max-w-2xl mx-auto text-center">
         <div class="glass-card p-8 sm:p-12 rounded-3xl shadow-lg border border-gold/40">
             <span class="text-terracotta font-semibold text-sm uppercase tracking-widest">Будемо раді бачити вас</span>
@@ -395,6 +432,22 @@
 
     <!-- JavaScript Interactions -->
     <script>
+        // Slideshow Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            if (slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+
+        if (slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
+
         // Countdown Timer Logic
         const eventDate = new Date('November 22, 2026 12:00:00').getTime();
 
@@ -417,27 +470,6 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
-
-        // RSVP Form Handling
-        function handleRSVP(e) {
-            e.preventDefault();
-            
-            // Trigger Confetti Celebration
-            confetti({
-                particleCount: 80,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-
-            document.getElementById('rsvpForm').classList.add('hidden');
-            document.getElementById('rsvpSuccess').classList.remove('hidden');
-        }
-
-        function resetRSVP() {
-            document.getElementById('rsvpForm').reset();
-            document.getElementById('rsvpForm').classList.remove('hidden');
-            document.getElementById('rsvpSuccess').classList.add('hidden');
-        }
 
         // Add to Calendar Feature
         function addToCalendar() {
